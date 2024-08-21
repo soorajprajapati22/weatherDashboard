@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        #updateForm {
+            display: none; /* Hide the form initially */
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/user/">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link btn btn-primary text-white" href="/logout">Logout</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container mt-4">
+    <h2>User Profile</h2>
+
+    <!-- Alert Message -->
+    <div class="alert-card" th:if="${message}">
+        <div class="alert alert-success">
+            <h4>Success</h4>
+            <p th:text="${message}"></p>
+        </div>
+    </div>
+
+    <!-- User Details Table -->
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Full Name</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${user.username}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.fullName}"></td>
+            <td>
+                <!-- Profile Update Button -->
+                <button id="updateProfileBtn" class="btn btn-primary">Update Profile</button>
+                <!-- Delete Account Button -->
+                <form action="/user/delete" method="post" style="display:inline;">
+                    <button type="submit" class="btn btn-danger">Delete Account</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- Update Profile Form -->
+    <div id="updateForm">
+        <form action="/user/update" method="post" class="mt-4">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" class="form-control" th:value="${user.username}" required>
+            </div>
+<!--            <div class="form-group">-->
+<!--                <label for="email">Email</label>-->
+<!--                <input type="email" id="email" name="email" class="form-control" th:value="${user.email}" required>-->
+<!--            </div>-->
+            <div class="form-group">
+                <label for="fullName">Full Name</label>
+                <input type="text" id="fullName" name="fullName" class="form-control" th:value="${user.fullName}" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" class="form-control">
+                <small class="form-text text-muted">Leave blank to keep current password.</small>
+            </div>
+            <button type="submit" class="btn btn-primary">Update Profile</button>
+        </form>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.8/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    document.getElementById('updateProfileBtn').addEventListener('click', function() {
+        var form = document.getElementById('updateForm');
+        if (form.style.display === 'none' || form.style.display === '') {
+            form.style.display = 'block'; // Show the form
+        } else {
+            form.style.display = 'none';  // Hide the form
+        }
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Weather Report</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-4">
+  <h1>Weather Report</h1>
+  <form action="/weather" method="get" class="mb-4">
+    <div class="form-group">
+      <label for="city">City</label>
+      <input type="text" id="city" name="city" class="form-control" placeholder="Enter city name">
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+  </form>
+
+  <div th:if="${weather}">
+    <h2>Weather in <span th:text="${weather.name}"></span></h2>
+    <p>Temperature: <span th:text="${weather.main.temp}"></span> °C</p>
+    <p>Description: <span th:text="${weather.weather[0].description}"></span></p>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.8/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

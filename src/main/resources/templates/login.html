@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="base::Layout(~{::section})">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<section>
+  <div class="container p-3">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <div class="card">
+          <div class="card-header text-center fs-4">
+            Login Page
+          </div>
+
+          <div th:if="${param.error}" class="alert alert-danger">
+            Invalid Username & Password
+          </div>
+          <div th:if="${param.logout}" class="alert alert-success">
+            Logout Successfully
+          </div>
+
+          <div class="card-body">
+            <form action="/login" method="post">
+              <div class="mb-3">
+                <label>Enter Email</label>
+                <input type="text" name="username" class="form-control" required>
+              </div>
+              <div class="mb-3">
+                <label>Enter Password</label>
+                <input type="password" name="password" class="form-control" required>
+              </div>
+              <button class="btn btn-primary col-md-12">Login</button>
+            </form>
+          </div>
+
+          <div class="card-footer text-center">
+            <p>New user? <a th:href="@{/register}">Register here</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
